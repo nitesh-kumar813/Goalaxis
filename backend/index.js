@@ -22,7 +22,12 @@ app.use(cookieParser());
 
 
 const corsOptions = {
-    origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173", // local dev
+    "https://goalaxis.vercel.app", // ✅ live frontend
+    "https://goalaxis-9fqk7mbcr-nitesh-kumar813s-projects.vercel.app", // ✅ Vercel preview URL (optional but good)
+  ],
+  
     credentials: true, 
   };
   app.use(cors(corsOptions));
