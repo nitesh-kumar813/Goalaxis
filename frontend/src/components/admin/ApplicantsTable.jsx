@@ -39,7 +39,6 @@ const ApplicantsTable = () => {
   };
 
   return (
-    
     <>
       <div className="w-full overflow-x-auto hidden md:block">
         <Table>
@@ -55,115 +54,118 @@ const ApplicantsTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {applicants?.applications?.map((item) => (
-              <motion.tr
-                key={item?._id}
-                initial={{ x: -100 }}
-                animate={{ x: 0 }}
-                exit={{ x: -100 }}
-                transition={{ duration: 0.5 }}
-              >
-                <TableCell>{item?.applicant?.fullname}</TableCell>
-                <TableCell>{item?.applicant?.email}</TableCell>
-                <TableCell>{item?.applicant?.phoneNumber}</TableCell>
-                <TableCell>
-                  {item.applicant?.profile?.resume ? (
-                    <a
-                      className="text-blue-600 cursor-pointer"
-                      href={item?.applicant?.profile?.resume}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item?.applicant?.profile?.resumeOriginalName}
-                    </a>
-                  ) : (
-                    <span>NA</span>
-                  )}
-                </TableCell>
-                <TableCell>
-                  {item?.applicant?.createdAt?.split("T")[0]}
-                </TableCell>
-                <TableCell className="float-right cursor-pointer">
-                  <Popover>
-                    <PopoverTrigger>
-                      <MoreHorizontal />
-                    </PopoverTrigger>
-                    <PopoverContent className="w-32">
-                      {shortlistingStatus.map((status, index) => (
-                        <div
-                          onClick={() => statusHandler(status, item?._id)}
-                          key={index}
-                          className="flex w-fit items-center my-2 cursor-pointer"
-                        >
-                          <span>{status}</span>
-                        </div>
-                      ))}
-                    </PopoverContent>
-                  </Popover>
-                </TableCell>
-              </motion.tr>
-            ))}
+            {Array.isArray(applicants?.applications) &&
+              applicants.applications.map((item) => (
+                <motion.tr
+                  key={item?._id}
+                  initial={{ x: -100 }}
+                  animate={{ x: 0 }}
+                  exit={{ x: -100 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <TableCell>{item?.applicant?.fullname}</TableCell>
+                  <TableCell>{item?.applicant?.email}</TableCell>
+                  <TableCell>{item?.applicant?.phoneNumber}</TableCell>
+                  <TableCell>
+                    {item.applicant?.profile?.resume ? (
+                      <a
+                        className="text-blue-600 cursor-pointer"
+                        href={item?.applicant?.profile?.resume}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item?.applicant?.profile?.resumeOriginalName}
+                      </a>
+                    ) : (
+                      <span>NA</span>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {item?.applicant?.createdAt?.split("T")[0]}
+                  </TableCell>
+                  <TableCell className="float-right cursor-pointer">
+                    <Popover>
+                      <PopoverTrigger>
+                        <MoreHorizontal />
+                      </PopoverTrigger>
+                      <PopoverContent className="w-32">
+                        {shortlistingStatus.map((status, index) => (
+                          <div
+                            onClick={() => statusHandler(status, item?._id)}
+                            key={index}
+                            className="flex w-fit items-center my-2 cursor-pointer"
+                          >
+                            <span>{status}</span>
+                          </div>
+                        ))}
+                      </PopoverContent>
+                    </Popover>
+                  </TableCell>
+                </motion.tr>
+              ))}
           </TableBody>
         </Table>
       </div>
 
       {/* Mobile layout - Cards */}
       <div className="block md:hidden space-y-4">
-        {applicants?.applications?.map((item) => (
-          <motion.div
-            key={item?._id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            className="border rounded-lg p-4 shadow-sm bg-white"
-          >
-            <p>
-              <strong>FullName:</strong> {item?.applicant?.fullname}
-            </p>
-            <p>
-              <strong>Email:</strong> {item?.applicant?.email}
-            </p>
-            <p>
-              <strong>Contact:</strong> {item?.applicant?.phoneNumber}
-            </p>
-            <p>
-              <strong>Resume:</strong>{" "}
-              {item.applicant?.profile?.resume ? (
-                <a
-                  className="text-blue-600 underline"
-                  href={item?.applicant?.profile?.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {item?.applicant?.profile?.resumeOriginalName}
-                </a>
-              ) : (
-                <span>NA</span>
-              )}
-            </p>
-            <p>
-              <strong>Date:</strong> {item?.applicant?.createdAt?.split("T")[0]}
-            </p>
-            <div className="mt-2 text-right">
-              <Popover>
-                <PopoverTrigger>
-                  <MoreHorizontal />
-                </PopoverTrigger>
-                <PopoverContent className="w-32">
-                  {shortlistingStatus.map((status, index) => (
-                    <div
-                      onClick={() => statusHandler(status, item?._id)}
-                      key={index}
-                      className="flex w-fit items-center my-2 cursor-pointer"
-                    >
-                      <span>{status}</span>
-                    </div>
-                  ))}
-                </PopoverContent>
-              </Popover>
-            </div>
-          </motion.div>
-        ))}
+        {Array.isArray(applicants?.applications) &&
+          applicants.applications.map((item) => (
+            <motion.div
+              key={item?._id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              className="border rounded-lg p-4 shadow-sm bg-white"
+            >
+              <p>
+                <strong>FullName:</strong> {item?.applicant?.fullname}
+              </p>
+              <p>
+                <strong>Email:</strong> {item?.applicant?.email}
+              </p>
+              <p>
+                <strong>Contact:</strong> {item?.applicant?.phoneNumber}
+              </p>
+              <p>
+                <strong>Resume:</strong>{" "}
+                {item.applicant?.profile?.resume ? (
+                  <a
+                    className="text-blue-600 underline"
+                    href={item?.applicant?.profile?.resume}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item?.applicant?.profile?.resumeOriginalName}
+                  </a>
+                ) : (
+                  <span>NA</span>
+                )}
+              </p>
+              <p>
+                <strong>Date:</strong>{" "}
+                {item?.applicant?.createdAt?.split("T")[0]}
+              </p>
+              <div className="mt-2 text-right">
+                <Popover>
+                  <PopoverTrigger>
+                    <MoreHorizontal />
+                  </PopoverTrigger>
+                  <PopoverContent className="w-32">
+                    {shortlistingStatus.map((status, index) => (
+                      <div
+                        onClick={() => statusHandler(status, item?._id)}
+                        key={index}
+                        className="flex w-fit items-center my-2 cursor-pointer"
+                      >
+                        <span>{status}</span>
+                      </div>
+                    ))}
+                  </PopoverContent>
+                </Popover>
+              </div>
+            </motion.div>
+          ))}
       </div>
     </>
   );

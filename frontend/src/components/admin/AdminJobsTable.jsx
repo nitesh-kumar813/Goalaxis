@@ -15,10 +15,12 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminJobsTable = () => {
   const { allAdminJobs, searchJobByText } = useSelector((store) => store.job);
-  const [filterJobs, setFilterJobs] = useState(allAdminJobs);
+  const [filterJobs, setFilterJobs] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!Array.isArray(allAdminJobs)) return;
     const filteredJobs = allAdminJobs.filter((job) => {
       if (!searchJobByText) return true;
       return (

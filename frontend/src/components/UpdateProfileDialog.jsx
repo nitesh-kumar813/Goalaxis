@@ -19,7 +19,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         email: user?.email || "",
         phoneNumber: user?.phoneNumber || "",
         bio: user?.profile?.bio || "",
-        skills: user?.profile?.skills?.map(skill => skill) || "",
+        skills: user?.profile?.skills?.join(', ') || "",
         file: user?.profile?.resume || ""
     });
     const dispatch = useDispatch();
@@ -80,8 +80,8 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                             <div className='grid grid-cols-4 items-center gap-4'>
                                 <Label htmlFor="name" className="text-right">Name</Label>
                                 <Input
-                                    id="name"
-                                    name="name"
+                                    id="fullname"
+                                    name="fullname"
                                     type="text"
                                     value={input.fullname}
                                     onChange={changeEventHandler}
@@ -102,8 +102,8 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                             <div className='grid grid-cols-4 items-center gap-4'>
                                 <Label htmlFor="number" className="text-right">Number</Label>
                                 <Input
-                                    id="number"
-                                    name="number"
+                                    id="phoneNumber"
+                                    name="phoneNumber"
                                     value={input.phoneNumber}
                                     onChange={changeEventHandler}
                                     className="col-span-3"

@@ -27,12 +27,12 @@ const Browse = () => {
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {
+          {/* {
                         allJobs.map((job) => (
                             <Job key={job._id} job={job} />
                         ))
-                    }
-          {/* {allJobs?.length !== 0 ? (
+                    } */}
+          {allJobs?.length !== 0 ? (
             allJobs?.map((job) => {
               return (
                 <motion.div
@@ -48,7 +48,7 @@ const Browse = () => {
             })
           ) : (
             <span>No Job Found</span>
-          )} */}
+          )}
         </div>
       </div>
     </div>
