@@ -18,15 +18,13 @@ const LatestJobCards = ({job}) => {
                     </Avatar>
                 </Button>
                 <div>
-                    {/* <h1 className='font-medium text-lg'>{job?.company?.name}</h1>
-                    <p className='text-sm text-gray-500'>India</p> */}
+                    
                     <h1 className='font-medium text-base sm:text-lg'>{job?.company?.name}</h1>
                     <p className='text-xs sm:text-sm text-gray-500'>India</p>
                 </div>
             </div>
             <div>
-                {/* <h1 className='font-bold text-lg my-2'>{job?.title}</h1>
-                <p className='text-sm text-gray-600'>{job?.description}</p> */}
+                
                 <h1 className='font-bold text-lg sm:text-xl my-2'>{job?.title}</h1>
                 <p className='text-sm sm:text-base text-gray-600 line-clamp-3'>{job?.description}</p>
             </div>
