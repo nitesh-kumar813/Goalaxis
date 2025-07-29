@@ -30,7 +30,7 @@ const Jobs = () => {
     <div className="bg-[conic-gradient(at_top_left,_#fbc2eb,_#a18cd1,_#fcb69f,_#fbc2eb)] min-h-screen ">
    
       <Navbar />
-      <div className="max-w-[85rem] mx-auto mt-5 ">
+      <div className="max-w-[90rem] mx-auto mt-5 ">
         <div className="flex flex-col lg:flex-row gap-3 px-5 ">
           <div className="w-full lg:w-1/6">
             <ResponsiveFilter />
@@ -41,7 +41,7 @@ const Jobs = () => {
               Job not found
             </span>
           ) : (
-            <div className="flex-1 h-[80vh] overflow-y-auto pb-5">
+            <div className="flex-1 h-[80vh] overflow-y-auto pb-5 bg-red500 pr-0 sm:pr-4 ">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {filterJobs.map((job) => (
                   <motion.div
