@@ -27,10 +27,11 @@ const Jobs = () => {
   }, [allJobs, searchedQuery]);
 
   return (
-    <div className="bg-[conic-gradient(at_top_left,_#fbc2eb,_#a18cd1,_#fcb69f,_#fbc2eb)] min-h-screen">
+    <div className="bg-[conic-gradient(at_top_left,_#fbc2eb,_#a18cd1,_#fcb69f,_#fbc2eb)] min-h-screen ">
+   
       <Navbar />
-      <div className="max-w-7xl mx-auto mt-5">
-        <div className="flex flex-col lg:flex-row gap-4 px-5">
+      <div className="max-w-[85rem] mx-auto mt-5 ">
+        <div className="flex flex-col lg:flex-row gap-3 px-5 ">
           <div className="w-full lg:w-1/6">
             <ResponsiveFilter />
           </div>
