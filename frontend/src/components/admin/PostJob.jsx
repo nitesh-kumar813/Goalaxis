@@ -32,11 +32,29 @@ const PostJob = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [salaryError, setSalaryError] = useState("");
+  const [experienceError, setExperienceError] = useState("");
   const navigate = useNavigate();
   const { companies } = useSelector((store) => store.company);
 
   const changeEventHandler = (e) => {
+    const val = e.target.value.trim();
     setInput({ ...input, [e.target.name]: e.target.value });
+
+    if (e.target.name === "salary") {
+      if (/^\d+(\.\d+)?$/.test(val) || val === "") {
+        setSalaryError("");
+      } else {
+        setSalaryError("Invalid salary");
+      }
+    }
+    if (e.target.name === "experience") {
+      if (/^\d+$/.test(val) || val === "") {
+        setExperienceError("");
+      } else {
+        setExperienceError("Invalid experience");
+      }
+    }
   };
 
   const selectChangeHandler = (value) => {
@@ -48,14 +66,31 @@ const PostJob = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (salaryError || experienceError) {
+      toast.error("Please fix salary before submitting.");
+      return;
+    }
+
+    const payload = {
+      ...input,
+      requirements: input.requirements
+        ? input.requirements.split(",").map((req) => req.trim())
+        : [],
+      experienceLevel: parseInt(input.experience, 10),
+      position: parseInt(input.position, 10),
+    };
+
     try {
+      console.log("👉 Sending input:", input);
+
       setLoading(true);
-      const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const res = await axios.post(`${JOB_API_END_POINT}/post`, payload, {
+        headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
+
+      console.log("✅ Response:", res.data);
+
       if (res.data.success) {
         toast.success(res.data.message);
         navigate("/admin/jobs");
@@ -73,15 +108,18 @@ const PostJob = () => {
       <div className="flex items-center justify-center w-full px-4 my-5">
         <form
           onSubmit={submitHandler}
-          className="p-6 sm:p-8 w-full max-w-4xl border border-gray-200 shadow-md rounded-md"
+          className="p-6 sm:p-8 w-full max-w-4xl border border-gray-200 shadow-2xl rounded-md sha"
         >
-          <h2 className="text-xl font-semibold mb-6 text-center">Post New Job</h2>
+          <h2 className="text-xl font-semibold mb-6 text-center">
+            Post New Job
+          </h2>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { label: "Title", name: "title" },
               { label: "Description", name: "description" },
               { label: "Requirements", name: "requirements" },
-              { label: "Salary", name: "salary" },
+              { label: "Salary (LPA)", name: "salary" },
               { label: "Location", name: "location" },
               { label: "Job Type", name: "jobType" },
               { label: "Experience Level", name: "experience" },
@@ -92,10 +130,27 @@ const PostJob = () => {
                 <Input
                   type={field.type || "text"}
                   name={field.name}
+                  placeholder={
+                    field.name === "salary"
+                      ? "e.g. 5"
+                      : field.name === "experience"
+                      ? "e.g. 3"
+                      : ""
+                  }
                   value={input[field.name]}
                   onChange={changeEventHandler}
-                  className="my-1 bg-white text-gray-800 placeholder-gray-400"
+                  className={`my-1 bg-white text-gray-800 placeholder-gray-400 ${
+                    field.name === "salary" && salaryError
+                      ? "border border-red-500"
+                      : ""
+                  }`}
                 />
+                {field.name === "salary" && salaryError && (
+                  <p className="text-xs text-red-600 mt-1">{salaryError}</p>
+                )}
+                {field.name === "experience" && experienceError && (
+                  <p className="text-xs text-red-600 mt-1">{experienceError}</p>
+                )}
               </div>
             ))}
 
@@ -146,4 +201,3 @@ const PostJob = () => {
 };
 
 export default PostJob;
-

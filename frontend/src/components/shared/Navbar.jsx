@@ -21,6 +21,7 @@ const Navbar = () => {
         withCredentials: true,
       });
       if (res.data.success) {
+        localStorage.removeItem("userBasic");
         dispatch(setUser(null));
         navigate("/");
         toast.success(res.data.message);
@@ -31,57 +32,83 @@ const Navbar = () => {
     }
   };
   const navBgClass =
-  location.pathname === "/login" || location.pathname === "/signup"
-    ? "bg-white"
-    : "bg-[conic-gradient(at_top_left,_#fbc2eb,_#a18cd1,_#fcb69f,_#fbc2eb)]";
-
+    location.pathname === "/login" || location.pathname === "/signup"
+      ? "bg-white"
+      : "bg-[conic-gradient(at_top_left,_#fbc2eb,_#a18cd1,_#fcb69f,_#fbc2eb)]";
 
   return (
     <div className={navBgClass}>
-      {/* <div className="flex items-center justify-between mx-auto max-w-7xl h-16"> */}
-      <div className="flex flex-wrap items-center justify-between mx-auto max-w-7xl px-4 h-auto py-4">
-
+      <div className="flex flex-wrap items-center justify-between mx-auto max-w-7xl px-4 h-auto pt-4 pb-3 ">
         <div>
           <h1 className="text-2xl font-bold">
             Goal<span className="text-[#F83002]">Axis</span>
           </h1>
         </div>
         <div className="flex items-center gap-12">
-          {/* <ul className="flex font-medium items-center gap-5"> */}
           <ul className="flex flex-wrap font-medium items-center gap-3 sm:gap-5 text-sm sm:text-base">
-
             {user && user.role === "recruiter" ? (
               <>
-                <li><Link to="/admin/companies">Companies</Link></li>
-                <li><Link to="/admin/jobs">Jobs</Link></li>
+                <li>
+                  <Link to="/admin/companies">Companies</Link>
+                </li>
+                <li>
+                  <Link to="/admin/jobs">Jobs</Link>
+                </li>
               </>
             ) : (
               <>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/jobs">Jobs</Link></li>
-                <li><Link to="/browse">Browse</Link></li>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/jobs">Jobs</Link>
+                </li>
+                <li>
+                  <Link to="/browse">Browse</Link>
+                </li>
+                
               </>
             )}
           </ul>
-          
-                  
+
           {!user ? (
             <div className="flex items-center gap-2">
-              <Link to="/login"><Button variant="outline">Login</Button></Link>
-              <Link to="/signup"><Button className="bg-[#6A38C2] hover:bg-[#5b30a6]"> Signup  </Button> </Link>
+              <Link to="/login">
+                <Button variant="outline">Login</Button>
+              </Link>
+              <Link to="/signup">
+                <Button className="bg-[#6A38C2] hover:bg-[#5b30a6]">
+                  {" "}
+                  Signup{" "}
+                </Button>{" "}
+              </Link>
             </div>
           ) : (
             <Popover>
               <PopoverTrigger asChild>
-                  <Avatar className="cursor-pointer">
-                  <AvatarImage src={user?.profile?.profilePhoto?.trim() ? user.profile.profilePhoto : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} alt="@shadcn"/>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage
+                    src={
+                      user?.profile?.profilePhoto?.trim()
+                        ? user.profile.profilePhoto
+                        : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                    }
+                    alt="@shadcn"
+                  />
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent className="w-80">
                 <div className="">
                   <div className="flex gap-2 space-y-2">
                     <Avatar className="cursor-pointer">
-                    <AvatarImage src={user?.profile?.profilePhoto?.trim() ? user.profile.profilePhoto : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} alt="@shadcn"/>
+                      <AvatarImage
+                        src={
+                          user?.profile?.profilePhoto?.trim()
+                            ? user.profile.profilePhoto
+                            : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                        }
+                        alt="@shadcn"
+                      />
                     </Avatar>
                     <div>
                       <h4 className="font-medium">{user?.fullname}</h4>
@@ -94,13 +121,18 @@ const Navbar = () => {
                     {user && user.role === "student" && (
                       <div className="flex w-fit items-center gap-2 cursor-pointer">
                         <User2 />
-                        <Button variant="link">{" "}<Link to="/profile">View Profile</Link></Button>
+                        <Button variant="link">
+                          {" "}
+                          <Link to="/profile">View Profile</Link>
+                        </Button>
                       </div>
                     )}
 
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <LogOut />
-                      <Button onClick={logoutHandler} variant="link">Logout</Button>
+                      <Button onClick={logoutHandler} variant="link">
+                        Logout
+                      </Button>
                     </div>
                   </div>
                 </div>

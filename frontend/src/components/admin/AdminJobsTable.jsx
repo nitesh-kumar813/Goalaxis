@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '../ui/table';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Edit2, Eye, MoreHorizontal } from 'lucide-react';
+import { Eye, MoreHorizontal } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,12 +27,12 @@ const AdminJobsTable = () => {
         job?.title?.toLowerCase().includes(searchJobByText.toLowerCase()) ||
         job?.company?.name?.toLowerCase().includes(searchJobByText.toLowerCase())
       );
-    });
+    }).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     setFilterJobs(filteredJobs);
   }, [allAdminJobs, searchJobByText]);
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto bg-white shadow-2xl rounded-md border border-gray-200">
       <Table>
         <TableCaption>A list of your recent posted jobs</TableCaption>
         <TableHeader>

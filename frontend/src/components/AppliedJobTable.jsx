@@ -31,7 +31,9 @@ const AppliedJobTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {allAppliedJobs.map((appliedJob) => (
+          {[...allAppliedJobs]
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            .map((appliedJob) => (
             <TableRow key={appliedJob._id}>
               <TableCell>{appliedJob?.createdAt?.split('T')[0]}</TableCell>
               <TableCell>{appliedJob.job?.title}</TableCell>

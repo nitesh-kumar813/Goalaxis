@@ -7,9 +7,19 @@ import useGetAllJobs from "@/hooks/useGetAllJobs";
 import { motion } from "framer-motion";
 
 const Browse = () => {
-  useGetAllJobs();
+  useGetAllJobs("browse");
+
   const { allJobs } = useSelector((store) => store.job);
   const dispatch = useDispatch();
+
+  const colors = [
+    "#F6E1CF",
+    "#C8F8ECFF",
+    "#E2DBFA",
+    "#BFFABD",
+    "#FABEDD",
+    "#BFC3CA",
+  ];
 
   useEffect(() => {
     return () => {
@@ -27,13 +37,8 @@ const Browse = () => {
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* {
-                        allJobs.map((job) => (
-                            <Job key={job._id} job={job} />
-                        ))
-                    } */}
           {allJobs?.length !== 0 ? (
-            allJobs?.map((job) => {
+            allJobs?.map((job, index) => {
               return (
                 <motion.div
                   key={job._id}
@@ -42,7 +47,7 @@ const Browse = () => {
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Job job={job} />
+                  <Job job={job} color={colors[index % colors.length]} />
                 </motion.div>
               );
             })

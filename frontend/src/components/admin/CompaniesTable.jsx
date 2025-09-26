@@ -35,7 +35,7 @@ const CompaniesTable = () => {
   }, [companies, searchCompanyByText]);
 
   return (
-    <div className="overflow-x-auto bg-white shadow-sm rounded-md border border-gray-200">
+    <div className="overflow-x-auto bg-white shadow-2xl rounded-md border border-gray-200">
       <Table className="min-w-[600px]">
         <TableCaption>A list of your recent registered companies</TableCaption>
         <TableHeader>

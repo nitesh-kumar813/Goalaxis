@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { RadioGroup } from "../ui/radio-group";
 import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -71,7 +70,7 @@ const Signup = () => {
       <div className="flex items-center justify-center px-4 sm:px-6 md:px-8 py-10">
         <form
           onSubmit={submitHandler}
-          className="w-full max-w-lg border border-gray-200 rounded-md p-6 bg-white shadow-sm"
+          className="w-full max-w-lg border-1 border-gray-200 rounded-md p-6 bg-white shadow-2xl "
         >
           <h1 className="font-bold text-2xl mb-6 text-center">Sign Up</h1>
 
@@ -83,6 +82,7 @@ const Signup = () => {
               value={input.fullname}
               onChange={changeEventHandler}
               placeholder="Nick"
+              className={"mt-1"}
             />
           </div>
 
@@ -94,6 +94,7 @@ const Signup = () => {
               value={input.email}
               onChange={changeEventHandler}
               placeholder="sample@gmail.com"
+              className={"mt-1"}
             />
           </div>
 
@@ -104,7 +105,7 @@ const Signup = () => {
               name="phoneNumber"
               value={input.phoneNumber}
               onChange={changeEventHandler}
-              placeholder="9000800321"
+              className={"mt-1"}
             />
           </div>
 
@@ -116,6 +117,7 @@ const Signup = () => {
               value={input.password}
               onChange={changeEventHandler}
               placeholder="Password"
+              className={"mt-1"}
             />
           </div>
 
@@ -129,7 +131,7 @@ const Signup = () => {
                   value="student"
                   checked={input.role === "student"}
                   onChange={changeEventHandler}
-                  className="cursor-pointer"
+                  className="cursor-pointer accent-blue-600"
                 />
                 <Label>Student</Label>
               </div>
@@ -140,7 +142,7 @@ const Signup = () => {
                   value="recruiter"
                   checked={input.role === "recruiter"}
                   onChange={changeEventHandler}
-                  className="cursor-pointer"
+                  className="cursor-pointer accent-blue-600"
                 />
                 <Label>Recruiter</Label>
               </div>

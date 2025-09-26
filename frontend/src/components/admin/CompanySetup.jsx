@@ -82,7 +82,7 @@ const CompanySetup = () => {
   return (
     <div className="min-h-screen ">
       <Navbar />
-      <div className="max-w-4xl mx-auto px-4 py-10">
+      <div className="max-w-4xl mx-auto px-4 py-10 ">
         <form onSubmit={submitHandler}>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-4 sm:p-8">
             <Button
@@ -97,7 +97,7 @@ const CompanySetup = () => {
           </div>
 
           {/* Form Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4 ">
             <div>
               <Label>Company Name</Label>
               <Input

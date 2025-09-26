@@ -1,4 +1,8 @@
+import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Home from "./components/Home";
@@ -8,11 +12,14 @@ import Profile from "./components/Profile";
 import JobDescription from "./components/JobDescription";
 import Companies from "./components/admin/Companies";
 import CompanyCreate from "./components/admin/CompanyCreate";
-import CompanySetup from './components/admin/CompanySetup'
+import CompanySetup from "./components/admin/CompanySetup";
 import AdminJobs from "./components/admin/AdminJobs";
-import PostJob from './components/admin/PostJob'
-import Applicants from './components/admin/Applicants'
-import ProtectedRoute from './components/admin/ProtectedRoute'
+import PostJob from "./components/admin/PostJob";
+import Applicants from "./components/admin/Applicants";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
+
+import { setUser } from "./redux/authSlice";
+import { USER_API_END_POINT } from "./utils/constant";
 
 const appRouter = createBrowserRouter([
   {
@@ -43,32 +50,79 @@ const appRouter = createBrowserRouter([
     path: "/profile",
     element: <Profile />,
   },
+  
   {
-    path:"/admin/companies",
-    element: <ProtectedRoute><Companies/></ProtectedRoute>
+    path: "/admin/companies",
+    element: (
+      <ProtectedRoute>
+        <Companies />
+      </ProtectedRoute>
+    ),
   },
   {
-    path:"/admin/companies/create",
-    element: <ProtectedRoute><CompanyCreate/></ProtectedRoute>
+    path: "/admin/companies/create",
+    element: (
+      <ProtectedRoute>
+        <CompanyCreate />
+      </ProtectedRoute>
+    ),
   },
   {
-    path:"/admin/companies/:id",
-    element:<ProtectedRoute><CompanySetup/></ProtectedRoute>
+    path: "/admin/companies/:id",
+    element: (
+      <ProtectedRoute>
+        <CompanySetup />
+      </ProtectedRoute>
+    ),
   },
   {
-    path:"/admin/jobs",
-    element:<ProtectedRoute><AdminJobs/></ProtectedRoute>
+    path: "/admin/jobs",
+    element: (
+      <ProtectedRoute>
+        <AdminJobs />
+      </ProtectedRoute>
+    ),
   },
   {
-    path:"/admin/jobs/create",
-    element:<ProtectedRoute><PostJob/></ProtectedRoute>
+    path: "/admin/jobs/create",
+    element: (
+      <ProtectedRoute>
+        <PostJob />
+      </ProtectedRoute>
+    ),
   },
   {
-    path:"/admin/jobs/:id/applicants",
-    element:<ProtectedRoute><Applicants/></ProtectedRoute>
+    path: "/admin/jobs/:id/applicants",
+    element: (
+      <ProtectedRoute>
+        <Applicants />
+      </ProtectedRoute>
+    ),
   },
 ]);
+
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const res = await axios.get(`${USER_API_END_POINT}/me`, {
+          withCredentials: true,
+        });
+        if (res.data.success) {
+          dispatch(setUser(res.data.user));
+        } else {
+          dispatch(setUser(null));
+        }
+      } catch (error) {
+        dispatch(setUser(null));
+      }
+    };
+
+    fetchCurrentUser();
+  }, [dispatch]);
+
   return (
     <div>
       <RouterProvider router={appRouter} />
