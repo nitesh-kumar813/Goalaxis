@@ -7,22 +7,31 @@ import { useNavigate } from "react-router-dom";
 import { formatSalary } from "@/utils/formatSalary";
 import { useDispatch, useSelector } from "react-redux";
 import { saveJob, unSaveJob } from "../redux/savedJobsActions";
+import { toast } from "sonner"; 
 
 const Job = ({ job, color }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { savedJobs } = useSelector((state) => state.savedJobs);
+  const { user } = useSelector((state) => state.auth); 
 
   
   const isSaved = savedJobs.some((j) => j?.job?._id === job._id);
 
+ 
   const handleSaveToggle = () => {
-    if (isSaved) {
-      dispatch(unSaveJob(job._id));
-    } else {
-      dispatch(saveJob(job._id));
+    if (!user) {
+    toast.error("Please login to save jobs"); 
+    return;
     }
-  };
+    
+    
+    if (isSaved) {
+    dispatch(unSaveJob(job._id));
+    } else {
+    dispatch(saveJob(job._id));
+    }
+    };
 
   const daysAgoFunction = (mongodbTime) => {
     const createdAt = new Date(mongodbTime);
