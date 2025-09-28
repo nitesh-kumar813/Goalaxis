@@ -10,7 +10,7 @@ import { USER_API_END_POINT } from "@/utils/constant";
 import { setUser } from "@/redux/authSlice";
 import { toast } from "sonner";
 
-const Navbar = () => {
+const Navbar = () => {                            
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -65,7 +65,11 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link to="/browse">Browse</Link>
-                </li>
+                  </li>
+                  <li>
+                  <Link to="/saved">Saved</Link>
+
+                  </li>
                 
               </>
             )}

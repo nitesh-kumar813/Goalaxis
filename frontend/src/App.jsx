@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import axios from "axios";
 
 import Login from "./components/auth/Login";
@@ -8,7 +8,8 @@ import Signup from "./components/auth/Signup";
 import Home from "./components/Home";
 import Jobs from "./components/Jobs";
 import Browse from "./components/Browse";
-import Profile from "./components/Profile";
+import Profile from "./components/Profile"; 
+import SavedJobs from "./components/SavedJobs";
 import JobDescription from "./components/JobDescription";
 import Companies from "./components/admin/Companies";
 import CompanyCreate from "./components/admin/CompanyCreate";
@@ -18,8 +19,11 @@ import PostJob from "./components/admin/PostJob";
 import Applicants from "./components/admin/Applicants";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 
+
 import { setUser } from "./redux/authSlice";
 import { USER_API_END_POINT } from "./utils/constant";
+
+
 
 const appRouter = createBrowserRouter([
   {
@@ -47,10 +51,13 @@ const appRouter = createBrowserRouter([
     element: <Browse />,
   },
   {
+    path:"/saved",
+    element:< SavedJobs />
+  },
+  {
     path: "/profile",
     element: <Profile />,
   },
-  
   {
     path: "/admin/companies",
     element: (
@@ -122,6 +129,10 @@ function App() {
 
     fetchCurrentUser();
   }, [dispatch]);
+
+ 
+
+
 
   return (
     <div>
