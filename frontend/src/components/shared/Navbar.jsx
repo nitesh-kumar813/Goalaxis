@@ -44,8 +44,8 @@ const Navbar = () => {
             Goal<span className="text-[#F83002]">Axis</span>
           </h1>
         </div>
-        <div className="flex items-center gap-12">
-          <ul className="flex flex-wrap font-medium items-center gap-3 sm:gap-5 text-sm sm:text-base">
+        <div className="flex items-center gap-5 ">
+          <ul className="flex flex-wrap font-medium items-center gap-2 sm:gap-5 text-sm sm:text-base">
             {user && user.role === "recruiter" ? (
               <>
                 <li>
