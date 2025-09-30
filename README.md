@@ -18,11 +18,14 @@
 
 ## 📋 <a name="table">Table of Contents</a>
 
-1. 🤖 [Introduction](#introduction)  
-2. ⚙️ [Tech Stack](#tech-stack)  
-3. 🔋 [Features](#features)  
-4. 🤸 [Quick Start](#quick-start)  
-5. 🕸️ [Project Structure](#structure)   
+1. 🤖 Introduction  
+2. ⚙️ Tech Stack  
+3. 🔋 Features 
+4. 🤸 Quick Start
+5. 🧑‍💻 Demo Login
+6. 🕸️ Project Structure
+
+   
 ---
 
 ## <a name="introduction">🤖 Introduction</a>
@@ -125,6 +128,22 @@ npm run dev
 
 ```
 Open [http://localhost:5173](http://localhost:5173) in your browser to view the project.
+
+---
+## <a name="quick-start">🧑‍💻 Demo Login</a>
+
+You can use the following demo credentials to explore the application:
+
+**Recruiter Account**
+
+```bash
+Email: email@email.com
+
+Password: nik12345
+
+Role: Recruiter
+
+```
 
 ---
 
