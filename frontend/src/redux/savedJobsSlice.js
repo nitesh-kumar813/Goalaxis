@@ -9,8 +9,11 @@ const savedJobsSlice = createSlice({
     setSavedJobs: (state, action) => {
       state.savedJobs = action.payload;
     },
+    clearSavedJobs: (state) => {
+      state.savedJobs = [];
+    },
   },
 });
 
-export const { setSavedJobs } = savedJobsSlice.actions;
+export const { setSavedJobs,clearSavedJobs } = savedJobsSlice.actions;
 export default savedJobsSlice.reducer;
